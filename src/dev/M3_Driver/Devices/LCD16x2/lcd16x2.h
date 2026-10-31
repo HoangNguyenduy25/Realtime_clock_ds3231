@@ -68,7 +68,7 @@
 #define LCD16X2_CMD_SET_DDRAM_ADDR    0x80U
 
 /**
- * Non-blocking initialization & co-routine state machine states.
+ * Non-blocking initialization state machine states.
  */
 typedef enum {
     LCD16X2_STATE_UNINIT = 0,
@@ -82,7 +82,7 @@ typedef enum {
 
 /**
  * Low-level hardware primitives (4-bit mode).
- * Each byte transfer takes ~42 us (safe inside a non-blocking task/co-routine).
+ * Each byte transfer takes ~42 us.
  */
 void LCD16x2_InitPins(void);
 void LCD16x2_Write4Bits(uint8_t nibble, bool is_data);
@@ -97,8 +97,8 @@ void LCD16x2_WriteString(const char *str);
 void LCD16x2_InitBlocking(void);
 
 /**
- * Co-routine / Non-blocking initialization and FIFO-backed differential display manager.
- * Uses FIFO_t from M4_Middleware to queue pending LCD operations and avoids _delay_ms (NFR-01).
+ * Initialization and FIFO-backed differential display manager.
+ * Uses FIFO_t from M4_Middleware to queue pending LCD operations and avoids _delay_ms.
  */
 void            LCD16x2_InitAsync(uint32_t current_tick_ms);
 bool            LCD16x2_IsReady(void);
@@ -114,7 +114,7 @@ uint16_t LCD16x2_PendingQueueCount(void);
 /**
  * Step the LCD co-routine state machine:
  * - During initialization: advances 4-bit HD44780 init steps using current_tick_ms.
- * - When ready: scans differential framebuffer (target vs. shadow), pushes changed characters
+ * - When ready: scans differential framebuffer, pushes changed characters
  *   into the internal FIFO_t, and drains up to max_ops_per_step items to the LCD hardware.
  * Returns true if display is completely synchronized and FIFO is empty.
  */
@@ -131,9 +131,9 @@ void LCD16x2_BufferPutString(uint8_t row, uint8_t col, const char *str);
 void LCD16x2_BufferWriteLinePadded(uint8_t row, const char *str);
 
 /**
- * Format the BTL main clock screen (Section 3.1) into the desired framebuffer:
+ * Format the BTL main clock screen into the desired framebuffer:
  *   Row 0: "dd/mm/yyyy  DOW " (e.g. "26/08/2026  WED ")
- *   Row 1: "hh:mm:ss   L:xxx" (e.g. "14:30:05   L:BLK") or "RTC ERROR       " on I2C fault.
+ *   Row 1: "hh:mm:ss   L:xxx" (e.g. "14:30:05   L:BLK") or "RTC ERROR " on I2C fault.
  */
 void LCD16x2_FormatClockScreen(uint8_t date,
                                uint8_t month,

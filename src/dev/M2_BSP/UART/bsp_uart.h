@@ -6,7 +6,7 @@
 
 #include "../../M3_Driver/Component/UART/uart.h"
 
-/* Initialize only hardware USART0 (PC104), before enabling interrupts. */
+/* Initialize only USART0 (PC104), before enabling interrupts. */
 bool BSP_UART0_Init(uint32_t cpu_hz, uint32_t baudrate);
 void BSP_UART0_Deinit(void);
 uart_dev_t *BSP_UART0_Device(void);

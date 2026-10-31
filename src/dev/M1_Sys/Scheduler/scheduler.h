@@ -9,7 +9,7 @@
 extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+/* Includes */
 #include <stdint.h>
 
 #ifndef TRUE
@@ -24,7 +24,7 @@ extern "C" {
 
 #include "scheduler_define.h"
 
-/* Exported types ------------------------------------------------------------*/
+/* Exported types */
 typedef void (*SCH_TASK)(void);
 
 typedef uint8_t SCH_TASK_HANDLE;
@@ -66,7 +66,7 @@ typedef struct SCH_SemaphoreTypedef
 } SCH_SemaphoreTypedef;
 #endif
 
-/* Exported functions --------------------------------------------------------*/
+/* Exported functions */
 void       SCH_Initialize(void);
 /* Initialize from a fixed application task table. The entries are copied so
  * SCH_TASK_SetPeriod can still change an individual task at runtime. */

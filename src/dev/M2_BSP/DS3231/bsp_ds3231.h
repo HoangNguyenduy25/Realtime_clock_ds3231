@@ -20,7 +20,7 @@ bool BSP_DS3231_Probe(void);
 
 /**
  * Returns true if the last DS3231 transaction failed (NACK or bus timeout).
- * Used to trigger "RTC ERROR" on the LCD and "-ERR,E05,RTC ERROR" on UART (FR-09).
+ * Used to trigger "RTC ERROR" on the LCD and "-ERR,E05,RTC ERROR" on UART.
  */
 bool BSP_DS3231_HasFault(void);
 
@@ -48,7 +48,7 @@ bool BSP_DS3231_SetDate(uint8_t date, uint8_t month, uint8_t year, uint8_t day);
 bool BSP_DS3231_ReadTemperature(DS3231_TempType *temp);
 
 /**
- * Configure, disable, or poll Alarm 1 (FR-12).
+ * Configure, disable, or poll Alarm 1.
  */
 bool BSP_DS3231_SetAlarm1(const DS3231_AlarmType *alarm, bool enable_interrupt);
 bool BSP_DS3231_DisableAlarm1(void);

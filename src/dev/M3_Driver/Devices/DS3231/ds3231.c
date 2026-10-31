@@ -390,7 +390,7 @@ bool DS3231_ReadDateTime(DS3231_DateTimeType *dt)
         return false;
     }
 
-    /* Read all 7 time/date registers in one continuous I2C transfer (Section 5.2.9). */
+    /* Read all 7 time/date registers in one continuous I2C transfer */
     if (!ds3231_read_block(DS3231_REG_SECONDS, raw, 7U))
     {
         return false;

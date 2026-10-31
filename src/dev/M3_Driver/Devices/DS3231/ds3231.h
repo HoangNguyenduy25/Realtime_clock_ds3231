@@ -49,7 +49,7 @@
 #define DS3231_STAT_A1F            (1U << 0)
 
 /**
- * Day-of-week convention (Section 10.1: 1 = Sunday .. 7 = Saturday).
+ * Day-of-week convention (1 = Sunday .. 7 = Saturday).
  */
 typedef enum {
     DS3231_DOW_INVALID = 0U,
@@ -129,7 +129,7 @@ bool DS3231_SetDate(uint8_t date, uint8_t month, uint8_t year, uint8_t day);
 /* Internal temperature sensor (registers 0x11 - 0x12) */
 bool DS3231_ReadTemperature(DS3231_TempType *temp);
 
-/* Alarm 1 support (FR-12) */
+/* Alarm 1 support */
 bool DS3231_SetAlarm1(const DS3231_AlarmType *alarm, bool enable_interrupt);
 bool DS3231_DisableAlarm1(void);
 bool DS3231_CheckAndClearAlarm1(bool *triggered);

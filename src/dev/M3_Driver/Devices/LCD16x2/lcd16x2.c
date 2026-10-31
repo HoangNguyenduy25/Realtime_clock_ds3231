@@ -514,7 +514,7 @@ void LCD16x2_FormatClockScreen(uint8_t date,
     }
     else
     {
-        /* When DS3231 is disconnected/faulted, Row 2 displays "RTC ERROR" (Section 3.1). */
+        /* When DS3231 is disconnected/faulted, Row 2 displays "RTC ERROR" */
         const char *err_msg = "RTC ERROR";
         for (i = 0U; err_msg[i] != '\0' && i < LCD16X2_COLS; i++)
         {

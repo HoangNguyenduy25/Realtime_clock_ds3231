@@ -10,7 +10,7 @@
 
 /**
  * Maximum number of queued LCD operations (command/character bytes) executed
- * per BSP_LCD_TaskStep() call (~42 us per operation -> 4 ops ~= 170 us << 5 ms NFR-01).
+ * per BSP_LCD_TaskStep() call (~42 us per operation -> 4 ops ~= 170 us << 5 ms).
  */
 #define BSP_LCD_OPS_PER_STEP 4U
 
@@ -38,7 +38,7 @@ bool BSP_LCD_IsReady(void);
 bool BSP_LCD_TaskStep(uint32_t current_tick_ms);
 
 /**
- * Framebuffer update functions (non-blocking, 0 us hardware wait; only changed characters
+ * Framebuffer update functions (only changed characters
  * are transmitted on subsequent BSP_LCD_TaskStep() calls).
  */
 void BSP_LCD_Clear(void);
@@ -48,7 +48,7 @@ void BSP_LCD_PutString(uint8_t row, uint8_t col, const char *str);
 void BSP_LCD_WriteLine(uint8_t row, const char *str);
 
 /**
- * Format the standard BTL main screen (Section 3.1) into the differential framebuffer:
+ * Format the standard BTL main screen into the differential framebuffer:
  *   Row 0: "dd/mm/yyyy  DOW " (e.g. "26/08/2026  WED ")
  *   Row 1: "hh:mm:ss   L:xxx" (e.g. "14:30:05   L:BLK") or "RTC ERROR       " when rtc_error is true.
  */

@@ -11,7 +11,7 @@
 #include "../../M4_Middleware/FIFO/fifo.h"
 
 #define BSP_UART0_RX_FIFO_SIZE 64U
-#define BSP_UART0_TX_FIFO_SIZE 256U
+#define BSP_UART0_TX_FIFO_SIZE 64U
 
 static uint8_t s_uart0_rx_buf[BSP_UART0_RX_FIFO_SIZE];
 static uint8_t s_uart0_tx_buf[BSP_UART0_TX_FIFO_SIZE];
