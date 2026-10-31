@@ -30,7 +30,7 @@ Phần mềm dùng **Cooperative Scheduler** (bộ lập lịch hợp tác, tick
 | Mã | Yêu cầu | Trạng thái | Module chính |
 |---|---|---|---|
 | FR-01 | Đọc DS3231 định kỳ ≤ 500 ms | Có (250 ms) | `app_clock` |
-| FR-02 | LCD hiển thị ngày/giờ, chỉ ghi ký tự thay đổi | Có | `app_lcd`, `lcd16x2` |
+| FR-02 | LCD hiển thị ngày/giờ, chỉ ghi ký tự thay đổi | Có | `app_lcd`, `lcd16x2` |git 
 | FR-03 | Nhận lệnh UART và phản hồi đúng khung | Có | `app_console`, `command` |
 | FR-04 | LED ON / OFF / BLINK chu kỳ 10–5000 ms | Có | `app_led`, `command_led` |
 | FR-05 | Đọc giờ/ngày (`TIME?`, `DATE?`, `DT?`) | Có | `command_time` |
@@ -88,7 +88,7 @@ flowchart TD
 | **M1_Sys** | `Scheduler` (tick 1 ms, soft timer), `SystemData` (bảng dữ liệu dùng chung), `CommandLine` (phân tích và thực thi lệnh). |
 | **M2_BSP** | Gắn driver với board cụ thể: chân, tần số, kích thước FIFO và các ISR (`TIMER0_COMPA`, `USART0_RX`, `USART0_UDRE`). |
 | **M3_Driver** | Driver chỉ dùng thư viện AVR và `M4_Middleware`. |
-| **M4_Middleware** | FIFO vòng an toàn với ngắt (`ATOMIC_BLOCK`). |
+| **M4_Middleware** | FIFO và sử dụng (`ATOMIC_BLOCK`). |
 
 **Quy tắc dữ liệu dùng chung:**
 
@@ -149,9 +149,9 @@ Bảng task nằm trong [app_main.c](src/dev/M0_App/app_main.c):
 
 | Task | Chu kỳ gọi | Pha ban đầu | Công việc |
 |---|---|---|---|
-| `AppConsole_Task` | 1 ms | 0 | Lấy ≤ 16 byte từ RX FIFO, gom dòng, thực thi lệnh, xả phần phản hồi còn lại |
+| `AppConsole_Task` | 1 ms | 0 | Lấy ≤ 16 byte từ RX FIFO, gom dòng, thực thi lệnh, trả về phản hồi |
 | `AppLed_Task` | 1 ms | 0 | Bật/tắt PB0 `SCH_TIM_LED` (sáng T/2, tắt T/2) |
-| `AppLcd_Task` | 2 ms | 0 | Khởi tạo LCD không chặn, vẽ lại khi có thay đổi hoặc mỗi 250 ms, ghi ≤ 4 thao tác mỗi lần |
+| `AppLcd_Task` | 2 ms | 0 | Khởi tạo LCD, vẽ lại khi có thay đổi hoặc mỗi 250 ms, ghi ≤ 4 thao tác mỗi lần |
 | `AppClock_Task` | 50 ms | 10 | Đọc thanh ghi DS3231 mỗi 250 ms|
 | `AppTemp_Task` | 250 ms | 125 | Đọc nhiệt độ định kỳ |
 
@@ -165,7 +165,7 @@ Bảng task nằm trong [app_main.c](src/dev/M0_App/app_main.c):
 |---|---|
 | Tham số | 9600 bps, 8N1, không điều khiển luồng |
 | Kết thúc lệnh | `CR LF`, chỉ `LF`, hoặc chỉ `CR` |
-| Độ dài tối đa | 48 ký tự **kể cả** ký tự kết thúc |
+| Độ dài tối đa | 48 ký tự, bao gồm kể cả ký tự kết thúc |
 | Cú pháp lệnh | `<TEN_LENH>[,<tham_so_1>[,<tham_so_2>...]]` |
 | Tên lệnh | Không phân biệt hoa/thường (`led,on` ≡ `LED,ON`) |
 | Phản hồi OK | `+OK[,<du_lieu>...]\r\n` |
@@ -307,7 +307,7 @@ LED,BLINK,abc         -> -ERR,E04,BAD FORMAT
 LED,BLINK,9000        -> -ERR,E03,PARAM OUT OF RANGE
 PING,1                -> -ERR,E02,WRONG PARAM COUNT
 <dòng dài hơn 48 ký tự> -> -ERR,E06,LINE TOO LONG
-(rút dây SDA) TIME?   -> -ERR,E05,RTC ERROR   (LCD: RTC ERROR)
+TIME?   -> -ERR,E05,RTC ERROR   (LCD: RTC ERROR)
 ```
 
 **Kiểm thử mất nguồn:** sau khi cài giờ, ngắt nguồn 5 V khoảng 30 giây rồi cấp lại. Giờ trên LCD phải tiếp tục đúng nhờ pin backup của DS3231.
