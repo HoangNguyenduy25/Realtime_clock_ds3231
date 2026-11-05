@@ -26,6 +26,7 @@ static bool                 s_console_initialized = false;
 
 
 /* Internal Non-Blocking Output SinK */
+
 /**
  * Flush up to max_bytes from the console staging FIFO into the BSP UART0 TX FIFO.
  */

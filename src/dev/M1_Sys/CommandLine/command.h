@@ -14,8 +14,8 @@ extern "C" {
  * - Multi-line HELP output requires ~210 bytes, so response buffer is 256 bytes.
  */
 #define COMMAND_MAX_LINE_LENGTH      48U
-#define COMMAND_WORK_BUFFER_SIZE     96U
-#define COMMAND_RESPONSE_MAX_LENGTH  64U
+#define COMMAND_WORK_BUFFER_SIZE     32U
+#define COMMAND_RESPONSE_MAX_LENGTH  48U
 
 /**
  * Fixed firmware identifier returned by the ID? command.

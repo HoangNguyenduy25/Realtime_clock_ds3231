@@ -96,7 +96,7 @@ bool APP_Init(void)
     }
 
     /* AppClock_Init and AppTemp_Init probe DS3231; if DS3231 is absent at boot,
-     * SystemData_HasRtcError() is set so LCD displays "RTC ERROR" (FR-09) while
+     * SystemData_HasRtcError() is set so LCD displays "RTC ERROR" while
      * UART and LED commands continue operating normally. */
     (void)AppClock_Init();
     (void)AppTemp_Init();

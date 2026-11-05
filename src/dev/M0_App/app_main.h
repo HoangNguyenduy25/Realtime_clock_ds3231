@@ -10,11 +10,11 @@ extern "C" {
 
 /**
  * Cooperative Scheduler Co-routine task periods (in milliseconds):
- * - Console (UART0 RX/TX & CLI parser): 1 ms  (fast response <= 100 ms per NFR-03)
- * - LED (non-blocking blink via SCH_TIM_LED): 1 ms (10..5000 ms period support per FR-04)
- * - LCD (non-blocking 4-bit HD44780 state machine): 2 ms (differential update per FR-02)
- * - Clock (DS3231 RTC polling & alarm check): 50 ms (polls DS3231 every 250 ms per FR-01)
- * - Temp (DS3231 temperature sensor polling): 250 ms (polls sensor every 1000 ms per FR-10)
+ * - Console (UART0 RX/TX): 1 ms  (fast response <= 100 ms)
+ * - LED (non-blocking blink via SCH_TIM_LED): 1 ms (10..5000 ms period support)
+ * - LCD (HD44780): 2 ms (differential update)
+ * - Clock (DS3231 RTC): 50 ms (polls DS3231 every 250 ms)
+ * - Temp (DS3231 temperature sensor): 250 ms (polls sensor every 1000 ms)
  */
 #define APP_MAIN_CONSOLE_PERIOD_MS  1U
 #define APP_MAIN_LED_PERIOD_MS      1U

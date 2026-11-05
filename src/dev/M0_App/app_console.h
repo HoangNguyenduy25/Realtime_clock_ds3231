@@ -14,7 +14,7 @@ extern "C" {
 /**
  * Per-tick non-blocking byte budgets for the Console Co-routine (NFR-01 <= 5 ms, NFR-03 <= 100 ms).
  */
-#define APP_CONSOLE_TX_FIFO_SIZE       32U
+#define APP_CONSOLE_TX_FIFO_SIZE       96U
 #define APP_CONSOLE_RX_BUDGET_PER_TICK 16U
 #define APP_CONSOLE_TX_BUDGET_PER_TICK 32U
 
