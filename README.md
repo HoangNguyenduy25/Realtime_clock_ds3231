@@ -321,7 +321,7 @@ TIME?   -> -ERR,E05,RTC ERROR   (LCD: RTC ERROR)
 | `F_CPU` | `8000000UL` | `M2_BSP/board.h`, `Makefile` |
 | `UART_XTP_BAUD` | `9600UL` | `M2_BSP/board.h` |
 | `TWI_SCL_FREQ_HZ` | `100000UL` | `M2_BSP/board.h` |
-| `BSP_UART0_RX_FIFO_SIZE` / `TX_FIFO_SIZE` | `64` / `64` byte | `M2_BSP/UART/bsp_uart.c` |
+| `BSP_UART0_RX_FIFO_SIZE` / `TX_FIFO_SIZE` | `32` / `64` byte | `M2_BSP/UART/bsp_uart.c` |
 | `APP_CONSOLE_TX_FIFO_SIZE` | `96` byte (FIFO trung gian) | `M0_App/app_console.h` |
 | `COMMAND_MAX_LINE_LENGTH` | `48` | `M1_Sys/CommandLine/command.h` |
 | `COMMAND_FIRMWARE_ID` | `"ATMEGA324-RTC,V1.0"` | `M1_Sys/CommandLine/command.h` |
